@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="TestSuite" >
+    <test name="ToolsQA" >
+        <classes>
+            <class name="TestCases"/>
+            <class name="VerifyLoginFunctionality" />
+            <class name="VerifyOrderFunctionality"/>
+        </classes>
+    </test>
+</suite>
