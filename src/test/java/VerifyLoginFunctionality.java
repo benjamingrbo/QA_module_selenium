@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 public class VerifyLoginFunctionality {
     private WebDriver driver;
 
+    //Open Google Chrome and navigate to site, this is in common for all test cases below, initial setup
     @BeforeMethod
     void setup(){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\bgrbo\\Downloads\\chromedriver.exe");
@@ -16,11 +17,13 @@ public class VerifyLoginFunctionality {
         driver.get("https://www.saucedemo.com/");
     }
 
+    //Close Google Chrome driver after every test case
     @AfterMethod
     void finish(){
         driver.quit();
     }
 
+    //Verify login functionality when using valid username and password
     @Test
     void verifyValidUsernameAndPassword(){
         String expectedUrl = "https://www.saucedemo.com/inventory.html";
@@ -31,6 +34,7 @@ public class VerifyLoginFunctionality {
     }
 
     //Negative test case
+    //Verify login functionality when using valid username and invalid password for that account
     @Test
     void verifyValidUsernameAndInvalidPassword(){
         String expectedMessage = "Epic sadface: Username and password do not match any user in this service";
@@ -42,6 +46,7 @@ public class VerifyLoginFunctionality {
     }
 
     //Negative test case
+    //Verify login functionality when leaving username and password fields empty
     @Test
     void verifyBlankFields(){
         String expectedMessage = "Epic sadface: Username is required";
@@ -51,6 +56,7 @@ public class VerifyLoginFunctionality {
     }
 
     //Negative test case
+    //Verify login functionality when using valid username and not entering value in password field
     @Test
     void verifyValidUsernameAndEmptyPassword(){
         String expectedMessage = "Epic sadface: Password is required";
@@ -61,6 +67,7 @@ public class VerifyLoginFunctionality {
     }
 
     //Negative test case
+    //Verify login functionality when leaving username field empty and entering random password
     @Test
     void verifyEmptyUsernameAndRandomPassword(){
         String expectedMessage = "Epic sadface: Username is required";
@@ -71,6 +78,7 @@ public class VerifyLoginFunctionality {
     }
 
     //Negative test case
+    //Verify login functionality when using non existing account
     @Test
     void verifyNonexistingAccount(){
         String expectedMessage = "Epic sadface: Username and password do not match any user in this service";

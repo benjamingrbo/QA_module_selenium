@@ -7,6 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -15,6 +17,7 @@ public class TestCases {
     private WebDriver driver;
     private WebDriverWait wait;
 
+    //Initial setup before every test case, because both of them have two same steps at start
     @BeforeMethod
     void setup(){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\bgrbo\\Downloads\\chromedriver.exe");
@@ -30,32 +33,41 @@ public class TestCases {
     }
 
 
+    //Closing Google Chrome driver after every test case
     @AfterMethod
     void finish(){
         driver.quit();
     }
 
 
+    //Verify presence of web elements
     @Test
     void verifyPresenceOfWebElements(){
         WebElement productHeader = driver.findElement(By.className("title"));
         boolean isProductHeaderPresent = productHeader.isDisplayed();
-        assertTrue(isProductHeaderPresent);
+        //assertTrue(isProductHeaderPresent);
 
         WebElement shoppingCart = driver.findElement(By.className("shopping_cart_link"));
         boolean isShoppingCartPresent = shoppingCart.isDisplayed();
-        assertTrue(isShoppingCartPresent);
+        //assertTrue(isShoppingCartPresent);
 
         WebElement burgerMenu = driver.findElement(By.xpath("//button[@id='react-burger-menu-btn']"));
         boolean isBurgerMenuPresent = burgerMenu.isDisplayed();
-        assertTrue(isBurgerMenuPresent);
+        //assertTrue(isBurgerMenuPresent);
 
         burgerMenu.click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='logout_sidebar_link']")));
         WebElement logout = driver.findElement(By.xpath("//a[@id='logout_sidebar_link']"));
         boolean isLogoutPresent = logout.isDisplayed();
-        assertTrue(isLogoutPresent);
+        //assertTrue(isLogoutPresent);
+
+        assertAll(
+                () -> assertTrue(isProductHeaderPresent),
+                () -> assertTrue(isShoppingCartPresent),
+                () -> assertTrue(isBurgerMenuPresent),
+                () -> assertTrue(isLogoutPresent)
+        );
     }
 
     @Test(priority = 1)

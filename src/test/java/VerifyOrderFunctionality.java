@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 public class VerifyOrderFunctionality {
     private WebDriver driver;
 
+
+    //Do the login, not testing it, just setup
     @BeforeMethod
     void setup(){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\bgrbo\\Downloads\\chromedriver.exe");
@@ -20,11 +22,13 @@ public class VerifyOrderFunctionality {
         driver.findElement(By.name("login-button")).click();
     }
 
+    //Close Google Chrome driver after test is done
     @AfterMethod
     void finish(){
         driver.quit();
     }
 
+    //Verify that user cannot make an order with empty shopping cart
     @Test
     void verifyEmptyShoppingCartOrder(){
         String expectedMessage = "Your shopping cart is empty";
